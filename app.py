@@ -35,7 +35,7 @@ def load_user(user_id):
 
 # 1. Mengambil kunci rahasia dari Environment Variables (Render)
 # Baris ini memastikan Flask-Dance bisa bekerja di lingkungan Render (HTTPS)
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'  
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 GOOGLE_ID = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")
 GOOGLE_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
 
