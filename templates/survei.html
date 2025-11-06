@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOTRAK Digital – Survei Keluhan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #FDE2E4, #E0F7EA); /* pink-hijau pastel */
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 950px;
+            margin: 50px auto;
+            background: #f3f6f9;
+            padding: 45px 50px;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: #e87cb7;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .subtext {
+            text-align: center;
+            color: #252f4c;
+            font-style: bold;
+            font-size: 16px;
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            background-color: #87cefa; 
+            color: #fff;
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-size: 18px;
+            margin-top: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            margin-top: 6px;
+            border: 1.5px solid #cfd8dc;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #7d95a0;
+            outline: none;
+            box-shadow: 0 0 8px rgba(125,149,160,0.3);
+        }
+
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 8px;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 18px;
+            font-size: 15px;
+        }
+
+        th, td {
+            border: 1px solid #abb3e0;
+            text-align: center;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #5f7a91;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafa;
+        }
+
+        .add-btn {
+            margin-top: 12px;
+            background-color: #252f4c;
+            color: #fff;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #7c8fc9;
+        }
+
+        .submit-btn {
+            margin-top: 35px;
+            background-color: #e87cb7;
+            color: white;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #fca7c9;
+        }
+
+        .note {
+            font-size: 13px;
+            color: gray;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 13px;
+            color: #7d7d7d;
+        }
+
+        footer span {
+            color: #f7a1b8;
+            font-weight: 600;
+        }
+
+        @media(max-width: 600px){
+            h1 { font-size: 2rem; }
+            h2 { font-size: 16px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Survei Keluhan Gangguan Otot Rangka</h1>
+        <p class="subtext">Hanya dapat diisi setelah login</p>
+
+        <form method="POST" action="/submit">
+            <!-- USER ID (opsional jika pakai login) -->
+            <input type="hidden" name="user_id" value="{{ current_user.id if current_user else '' }}">
+
+            <!-- BAGIAN I: Data Pribadi -->
+            <h2>Bagian I: Data Pribadi</h2>
+            <label>Nama Pekerja:</label>
+            <input type="text" name="nama" required>
+
+            <label>ID Pekerja:</label>
+            <input type="text" name="id_pekerja">
+
+            <label>Umur:</label>
+            <input type="number" name="umur" min="15" max="70" required>
+
+            <label>Jenis Kelamin:</label>
+            <select name="jenis_kelamin" required>
+                <option value="">-- Pilih --</option>
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+            </select>
+
+            <label>Tinggi Badan (cm):</label>
+            <input type="number" name="tinggi" min="100" max="250">
+
+            <label>Berat Badan (kg):</label>
+            <input type="number" name="berat" min="30" max="200">
+
+            <!-- BAGIAN II: Data Pekerjaan -->
+            <h2>Bagian II: Data Pekerjaan</h2>
+            <label>Nama Perusahaan:</label>
+            <input type="text" name="perusahaan" required>
+
+            <label>Departemen / Divisi:</label>
+            <input type="text" name="divisi" required>
+
+            <label>Posisi / Jabatan:</label>
+            <input type="text" name="jabatan" required>
+
+            <label>Lama Kerja di Perusahaan (tahun):</label>
+            <input type="number" name="lama_kerja" min="0" required>
+
+            <label>Jam Kerja per Hari (jam):</label>
+            <input type="number" name="jam_kerja" min="1" max="24" required>
+
+            <label>Shift Kerja:</label>
+            <select name="shift" required>
+                <option value="">-- Pilih --</option>
+                <option value="Pagi">Pagi</option>
+                <option value="Sore">Sore</option>
+                <option value="Malam">Malam</option>
+                <option value="Bergilir / Rotasi">Bergilir / Rotasi</option>
+                <option value="Tidak tetap / Fleksibel">Tidak tetap / Fleksibel</option>
+                <option value="Non-shift (kantor tetap)">Non-shift (kantor tetap)</option>
+            </select>
+
+            <label>Tanggal Survei:</label>
+            <input type="date" name="tanggal" required>
+
+            <!-- BAGIAN III: Tugas -->
+            <h2>Bagian III: Deskripsi Tugas dan Durasi</h2>
+            <table id="tabelTugas">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Deskripsi Tugas</th>
+                        <th>Durasi (menit)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" name="deskripsi_tugas[]" required></td>
+                        <td><input type="number" name="durasi_tugas[]" min="0" required></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="add-btn" onclick="tambahTugas()">+ Tambah Tugas</button>
+
+            <!-- BAGIAN IV: Kuesioner -->
+            <h2>Bagian IV: Kondisi & Pengalaman Kerja</h2>
+            <label>1. Tangan dominan:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="tangan_dominan" value="Kanan" required> Kanan</label>
+                <label><input type="radio" name="tangan_dominan" value="Kiri"> Kiri</label>
+                <label><input type="radio" name="tangan_dominan" value="Keduanya"> Keduanya</label>
+            </div>
+
+            <label>2. Lama bekerja pada posisi saat ini:</label>
+            <select name="lama_bekerja_posisi" required>
+                <option value="">-- Pilih --</option>
+                <option value="<3 bulan">Kurang dari 3 bulan</option>
+                <option value="3 bulan - 1 tahun">3 bulan - 1 tahun</option>
+                <option value="1 - 5 tahun">1 - 5 tahun</option>
+                <option value="5 - 10 tahun">5 - 10 tahun</option>
+                <option value=">10 tahun">Lebih dari 10 tahun</option>
+            </select>
+
+            <label>3. Seberapa sering merasakan kelelahan mental?</label>
+            <select name="kelelahan_mental" required>
+                <option value="">-- Pilih --</option>
+                <option value="Tidak pernah">Tidak pernah</option>
+                <option value="Kadang-kadang">Kadang-kadang</option>
+                <option value="Sering">Sering</option>
+                <option value="Selalu">Selalu</option>
+            </select>
+
+            <label>4. Seberapa sering merasakan kelelahan fisik?</label>
+            <select name="kelelahan_fisik" required>
+                <option value="">-- Pilih --</option>
+                <option value="Tidak pernah">Tidak pernah</option>
+                <option value="Kadang-kadang">Kadang-kadang</option>
+                <option value="Sering">Sering</option>
+                <option value="Selalu">Selalu</option>
+            </select>
+
+            <label>5. Pernahkah mengalami nyeri atau ketidaknyamanan dalam 1 tahun terakhir?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="keluhan_setahun" value="Ya" required> Ya</label>
+                <label><input type="radio" name="keluhan_setahun" value="Tidak"> Tidak</label>
+            </div>
+            <p class="note">*Jika "Ya", Anda akan diarahkan ke halaman Body Map.</p>
+
+            <button type="submit" class="submit-btn">Kirim Survei</button>
+        </form>
+
+        <footer>
+            © 2025 <span>GOTRAK Digital</span> – dikembangkan oleh Naura Rafifah
+        </footer>
+    </div>
+
+    <script>
+        function tambahTugas() {
+            const table = document.getElementById("tabelTugas").getElementsByTagName("tbody")[0];
+            const rowCount = table.rows.length + 1;
+            const row = table.insertRow();
+            row.innerHTML = `
+                <td>${rowCount}</td>
+                <td><input type="text" name="deskripsi_tugas[]" required></td>
+                <td><input type="number" name="durasi_tugas[]" min="0" required></td>
+            `;
+        }
+    </script>
+</body>
+</html>

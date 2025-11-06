@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – GOTRAK Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            color: #e87cb7;
+        }
+        .menu a {
+            display: inline-block;
+            margin: 15px 10px 0 0;
+            padding: 12px 25px;
+            background-color: #252f4c;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .menu a:hover {
+            background-color: #7c8fc9;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 Dashboard GOTRAK Digital</h1>
+    <p>Halo, {{ current_user.nama }}!</p>
+    <div class="menu">
+        <a href="survei.html">Isi Survei</a>
+        <a href="/keluhan">Lihat Data Keluhan</a>
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>
