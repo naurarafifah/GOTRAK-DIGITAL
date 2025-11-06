@@ -24,7 +24,7 @@ login_manager.init_app(app)
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
-    password = db.Column(db.String(150))  # Hashed password sebaiknya digunakan
+    password = db.Column(db.String(150)) # Hashed password sebaiknya digunakan
     google_id = db.Column(db.String(150), unique=True, nullable=True)
 
 @login_manager.user_loader
