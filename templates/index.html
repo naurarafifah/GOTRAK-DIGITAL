@@ -3,97 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOTRAK Digital – Selamat Datang</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <title>GOTRAK Digital</title>
+    <!-- Tambahkan Font Awesome untuk ikon Google -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=500;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-
         body {
-            background: linear-gradient(135deg, #FDE2E2, #E0F7F3);
-            height: 100vh;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            /* Gradient yang kamu suka */
+            background: linear-gradient(to bottom, #fce4ec, #e8f5e9);
+            margin: 0;
         }
-
         .container {
-            background: #ffffffcc;
-            padding: 50px 60px;
-            border-radius: 25px;
             text-align: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            max-width: 450px;
-            width: 90%;
+            background: #fff;
+            padding: 50px 60px;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
         }
-
         h1 {
+            color: #e91e63;
             font-size: 2.5rem;
-            color: #e87cb7;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-weight: 700;
         }
-
-        p.subtext {
-            color: #555;
+        p {
             margin-bottom: 40px;
+            color: #555;
+            font-size: 1rem;
             font-weight: 500;
         }
-
         .btn {
-            display: block;
+            display: block; /* Membuat tombol mengambil lebar penuh container */
             width: 100%;
-            padding: 14px 0;
-            margin: 12px 0;
-            border: none;
+            margin: 15px 0; /* Tambah margin atas/bawah */
+            padding: 15px 28px;
             border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
-            cursor: pointer;
+            text-decoration: none;
+            color: white;
             transition: 0.3s;
+            cursor: pointer;
         }
-
-        .btn-signup { background-color: #FCA7C9; color: white; }
-        .btn-signup:hover { background-color: #e87cb7; }
-
-        .btn-login { background-color: #87D6C6; color: white; }
-        .btn-login:hover { background-color: #56bca9; }
-
-        .btn-google { background-color: #4285F4; color: white; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .btn-google:hover { background-color: #3367d6; }
-
-        footer {
-            margin-top: 30px;
-            font-size: 13px;
-            color: #777;
+        /* Penyesuaian warna tombol agar mirip dengan gambar kamu */
+        .btn-register { background-color: #ff8ab7; } /* Pink muda */
+        .btn-register:hover { background-color: #e96d9e; }
+        .btn-login { background-color: #64dd17; } /* Hijau mint/teal */
+        .btn-login:hover { background-color: #53b715; }
+        .btn-google { 
+            background-color: #4285f4; /* Warna biru Google yang khas */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Jarak antara ikon dan teks */
         }
-
-        footer span { color: #e87cb7; font-weight: 600; }
+        .btn-google:hover { background-color: #3b78e7; }
+        .btn-google i {
+            font-size: 18px;
+        }
     </style>
 </head>
-
 <body>
     <div class="container">
         <h1>Selamat Datang di GOTRAK Digital</h1>
-        <p class="subtext">Survei Keluhan Gangguan Otot Rangka Akibat Kerja</p>
+        <p>Survei Keluhan Gangguan Otot Rangka Akibat Kerja</p>
 
-        <!-- Tombol Daftar / Login -->
-        <a href="{{ url_for('register') }}"><button class="btn btn-signup">Daftar</button></a>
-        <a href="{{ url_for('login') }}"><button class="btn btn-login">Login</button></a>
+        <!-- 1. TOMBOL DAFTAR (Tautan lama sudah benar) -->
+        <a href="{{ url_for('register') }}" class="btn btn-register">Daftar</a>
 
-        <!-- Tombol Login dengan Google -->
-        <a href="{{ url_for('google_login') }}">
-            <button class="btn btn-google">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google Logo" width="20">
-                Login dengan Google
-            </button>
+        <!-- 2. TOMBOL LOGIN (Tautan lama sudah benar) -->
+        <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
+        
+        <!-- 3. TOMBOL LOGIN DENGAN GOOGLE (PERUBAHAN KRITIS DI SINI) -->
+        <a href="{{ url_for('google.login') }}" class="btn btn-google">
+            <!-- Menggunakan ikon Google dari Font Awesome -->
+            <i class="fab fa-google"></i> Login dengan Google
         </a>
 
-        <footer>
-            © 2025 <span>GOTRAK Digital</span> – Dikembangkan oleh Naura Rafifah
-        </footer>
     </div>
 </body>
 </html>

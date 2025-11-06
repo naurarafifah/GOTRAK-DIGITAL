@@ -4,31 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - GOTRAK Digital</title>
+    <!-- Tambahkan Font Awesome untuk ikon Google -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Poppins', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #fce4ec; margin: 0; }
         .container { background: #fff; padding: 40px 50px; border-radius: 20px; box-shadow: 0 12px 30px rgba(0,0,0,0.1); text-align: center; }
         h1 { color: #e91e63; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1.5px solid #cfd8dc; }
-        .btn { width: 100%; padding: 12px; border: none; border-radius: 12px; color: white; font-weight: 600; margin-top: 15px; cursor: pointer; transition: 0.3s; }
+        /* Style untuk Flash Messages */
+        .flash-message { 
+            padding: 10px; 
+            margin-bottom: 15px; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            color: white; 
+            text-align: left;
+        }
+        .flash-message.error { background-color: #f44336; }
+        .flash-message.success { background-color: #4CAF50; }
+        
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1.5px solid #cfd8dc; box-sizing: border-box; }
+        
+        .btn { 
+            width: 100%; padding: 12px; border: none; border-radius: 12px; 
+            color: white; font-weight: 600; margin-top: 15px; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
         .btn-login { background-color: #4caf50; }
         .btn-login:hover { background-color: #45a049; }
-        .btn-google { background-color: #db4437; margin-top: 10px; }
-        .btn-google:hover { background-color: #c1351d; }
-        a { display: block; margin-top: 15px; color: #2196f3; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        
+        .btn-google { background-color: #4285f4; margin-top: 10px; } /* Warna Google yang benar */
+        .btn-google:hover { background-color: #3b78e7; }
+        .btn-google i { font-size: 18px; }
+        
+        /* Tautan Register */
+        .register-link { display: block; margin-top: 20px; color: #2196f3; text-decoration: none; }
+        .register-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Login</h1>
+
+        <!-- Tampilkan Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
         <form method="POST">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit" class="btn btn-login">Login</button>
         </form>
-        <a href="{{ url_for('google_login') }}" class="btn btn-google">Login dengan Google</a>
-        <a href="{{ url_for('register') }}">Belum punya akun? Register</a>
+        
+        <!-- PERBAIKAN KRITIS DI SINI: MENGGUNAKAN 'google.login' -->
+        <a href="{{ url_for('google.login') }}" class="btn btn-google">
+            <i class="fab fa-google"></i> Login dengan Google
+        </a>
+        
+        <a href="{{ url_for('register') }}" class="register-link">Belum punya akun? Register</a>
     </div>
 </body>
 </html>
