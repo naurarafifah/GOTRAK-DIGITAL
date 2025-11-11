@@ -7,7 +7,7 @@ import os
 # ================= INISIALISASI APLIKASI =================
 app = Flask(__name__)
 # Secret key harus sama dengan yang ada di Render Env Vars jika ada, tapi pastikan ini adalah string yang kuat
-app.secret_key = "supersecretkey123" 
+app.secret_key = os.environ.get("SECRET_KEY", "fallback_key_untuk_local_dev")
 
 # ================= DATABASE CONFIG =================
 # Menggunakan sqlite untuk development, Render akan menggunakan file ini
